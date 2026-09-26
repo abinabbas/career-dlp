@@ -39,6 +39,7 @@ export const EnquiryFormSection = forwardRef<HTMLElement, EnquiryFormSectionProp
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [submitError, setSubmitError] = useState('');
     const [referenceId, setReferenceId] = useState('');
     const { ref: revealRef, isVisible } = useScrollReveal({ threshold: 0.1 });
 
@@ -49,18 +50,38 @@ export const EnquiryFormSection = forwardRef<HTMLElement, EnquiryFormSectionProp
         ...prev,
         [e.target.name]: e.target.value
       }));
+      if (submitError) setSubmitError('');
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       setIsSubmitting(true);
+      setSubmitError('');
 
-      setTimeout(() => {
-        setIsSubmitting(false);
+      try {
+        const response = await fetch('/api/consult', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData),
+        });
+        const data = (await response.json().catch(() => ({}))) as {
+          ok?: boolean;
+          referenceId?: string;
+          error?: string;
+        };
+
+        if (!response.ok || !data.ok) {
+          throw new Error(data.error || 'Unable to submit your enquiry. Please try again.');
+        }
+
+        setReferenceId(data.referenceId || `DLP-${Math.floor(100000 + Math.random() * 900000)}`);
         setIsSubmitted(true);
-        setReferenceId(`DLP-${Math.floor(100000 + Math.random() * 900000)}`);
         triggerFormSubmissionConfetti();
-      }, 700);
+      } catch (err) {
+        setSubmitError(err instanceof Error ? err.message : 'Unable to submit your enquiry. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
     };
 
     const handleReset = () => {
@@ -74,6 +95,7 @@ export const EnquiryFormSection = forwardRef<HTMLElement, EnquiryFormSectionProp
         challenge: ''
       });
       setIsSubmitted(false);
+      setSubmitError('');
     };
 
     return (
@@ -422,6 +444,12 @@ export const EnquiryFormSection = forwardRef<HTMLElement, EnquiryFormSectionProp
                           className="w-full p-3.5 rounded-xl border border-slate-200 text-base sm:text-sm text-[#0F172A] placeholder:text-slate-400 focus:ring-2 focus:ring-[#7C3AED]/25 focus:border-[#7C3AED] focus:outline-none bg-white transition-all shadow-xs font-['Outfit',sans-serif] leading-relaxed resize-none"
                         />
                       </div>
+
+                      {submitError ? (
+                        <p className="text-xs text-red-600 bg-red-50 border border-red-100 rounded-xl px-3 py-2 font-['Outfit',sans-serif]">
+                          {submitError}
+                        </p>
+                      ) : null}
 
                       <button
                         type="submit"
