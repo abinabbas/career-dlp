@@ -28,7 +28,7 @@ export const MobileStickyBar: React.FC = () => {
       className="flex md:hidden fixed bottom-0 left-0 right-0 px-3 pt-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] bg-white/95 backdrop-blur-md border-t border-purple-100/90 shadow-2xl items-center justify-between gap-2.5 w-full max-w-full z-[9999] pointer-events-auto animate-fadeIn"
     >
       <a
-        href="tel:+18005550199"
+        href="tel:+917994447500"
         className="flex-1 h-11 px-3.5 bg-[#7C3AED] hover:bg-[#6D28D9] text-white rounded-xl flex items-center justify-center gap-2 font-headline font-semibold text-xs sm:text-sm shadow-sm shadow-purple-500/25 transition-all duration-300 active:scale-95 border border-purple-400/30"
       >
         <svg className="w-4 h-4 shrink-0 fill-current text-white" viewBox="0 0 24 24">
@@ -38,7 +38,7 @@ export const MobileStickyBar: React.FC = () => {
       </a>
 
       <a
-        href="https://wa.me/"
+        href="https://wa.me/917994447500"
         target="_blank"
         rel="noreferrer"
         className="flex-1 h-11 px-3.5 bg-[#0047FF] hover:bg-[#0038CC] text-white rounded-xl flex items-center justify-center gap-2 font-headline font-semibold text-xs sm:text-sm shadow-sm shadow-blue-500/25 transition-all duration-300 active:scale-95 border border-blue-400/30"

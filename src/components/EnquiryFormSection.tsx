@@ -265,7 +265,7 @@ export const EnquiryFormSection = forwardRef<HTMLElement, EnquiryFormSectionProp
 
                     <div className="flex flex-col sm:flex-row gap-2.5 w-full max-w-md pt-2">
                       <a
-                        href="https://wa.me/"
+                        href="https://wa.me/917994447500"
                         target="_blank"
                         rel="noreferrer"
                         className="flex-1 h-11 px-4 bg-[#0047FF] hover:bg-[#0038CC] text-white text-xs font-headline font-semibold rounded-xl flex items-center justify-center gap-2 shadow-sm shadow-blue-500/20 active:scale-95 transition-all border border-blue-400/30"
@@ -368,7 +368,7 @@ export const EnquiryFormSection = forwardRef<HTMLElement, EnquiryFormSectionProp
                             required
                             type="tel"
                             autoComplete="tel"
-                            placeholder="+1 (555) 000-0000"
+                            placeholder="+91 79944 47500"
                             className="w-full h-11 sm:h-11 px-3.5 rounded-xl border border-slate-200 text-base sm:text-sm text-[#0F172A] placeholder:text-slate-400 focus:ring-2 focus:ring-[#7C3AED]/25 focus:border-[#7C3AED] focus:outline-none bg-white transition-all shadow-xs"
                           />
                         </div>
